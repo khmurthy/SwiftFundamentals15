@@ -1,12 +1,12 @@
-# Name: 
+# Name: Kieran Murthy
 
 ## About Me
-* School Email: 
-* Dream Career: 
-* Hidden Talent: 
+* School Email: murthyk1259@durhamtech.edu
+* Dream Career: Bioinformatician
+* Hidden Talent: Music writing and guitar
 
 ## Course Information
-* Semester: 
+* Semester: Spring 2025
 * Course Name: CSC 118 - Swift Fundamentals I
 * Institution: [Durham Technical Community College](https://www.durhamtech.edu/)
 * Textbook: [Develop in Swift Fundamentals Xcode 15](https://books.apple.com/us/book/develop-in-swift-fundamentals/id6468967906)
