@@ -7,6 +7,12 @@ class Spaceship {
     let name: String
     var health: Int
     var position: Int
+    
+    init(name: String, health: Int, position: Int) {
+        self.name = name
+        self.health = health
+        self.position = position
+    }
 
     func moveLeft() {
         position -= 1
@@ -27,6 +33,12 @@ class Spaceship {
 class Fighter: Spaceship {
     let weapon: String
     var remainingFirePower: Int
+    
+    init(name: String, health: Int, position: Int, weapon: String, remainingFirePower: Int) {
+        self.weapon = weapon
+        self.remainingFirePower = remainingFirePower
+        super.init(name: name, health: health, position: position)
+    }
 
     func fire() {
         if remainingFirePower > 0 {
@@ -39,6 +51,11 @@ class Fighter: Spaceship {
 
 class ShieldedShip: Fighter {
     var shieldStrength: Int
+    
+    init(name: String, health: Int, position: Int, weapon: String, remainingFirePower: Int, shieldStrength: Int) {
+        self.shieldStrength = shieldStrength
+        super.init(name: name, health: health, position: position, weapon: weapon, remainingFirePower: remainingFirePower)
+    }
 
     override func wasHit() {
         if shieldStrength > 0 {
@@ -53,24 +70,36 @@ class ShieldedShip: Fighter {
 
  Then create an instance of `Spaceship` below called `falcon`. Use the memberwise initializer you just created. The ship's name should be "Falcon."
  */
-
+let falcon = Spaceship(name: "Falcon", health: 100, position: 0)
 
 /*:
  Writing initializers for subclasses can get tricky. Your initializer needs to not only set the properties declared on the subclass, but also set all of the uninitialized properties on classes that it inherits from. Go to the declaration of `Fighter` and write an initializer that takes an argument for each property on `Fighter` and for each property on `Spaceship`. Set the properties accordingly. (Hint: you can call through to a superclass's initializer with `super.init` *after* you initialize all of the properties on the subclass).
 
  Then create an instance of `Fighter` below called `destroyer`. Use the memberwise initializer you just created. The ship's name should be "Destroyer."
  */
-
+let destroyer = Fighter(name: "Destroyer", health: 90, position: 0, weapon: "gun", remainingFirePower: 50)
 
 /*:
  Now go add an initializer to `ShieldedShip` that takes an argument for each property on `ShieldedShip`, `Fighter`, and `Spaceship`, and sets the properties accordingly. Remember that you can call through to the initializer on `Fighter` using `super.init`.
 
  Then create an instance of `ShieldedShip` below called `defender`. Use the memberwise initializer you just created. The ship's name should be "Defender."
  */
-
+let defender = ShieldedShip(name: "Defender", health: 100, position: 0, weapon: "ballista", remainingFirePower: 20, shieldStrength: 60)
 
 //:  Create a new constant named `sameShip` and set it equal to `falcon`. Print out the position of `sameShip` and `falcon`, then call `moveLeft()` on `sameShip` and print out the position of `sameShip` and `falcon` again. Did both positions change? Why? If both were structs instead of classes, would it be the same? Why or why not? Provide your answer in a comment or print statement below.
+let sameShip: Spaceship = falcon
+print("Initial position of sameShip: \(sameShip.position)")
+print("Initial position of falcon: \(falcon.position)")
 
+sameShip.moveRight()
+print("Position of sameShip after moving right: \(sameShip.position)")
+print("Position of falcon after moving right: \(falcon.position)")
+
+//Both positions change at the same time because they are the same variable. sameShip is just a reference to the falcon object,
+//and their values are the same. I initially expected this to be the same for structs. That is not the case, however, because
+//when a new value of a type defined by a struct is created, it creates a new object, not a reference. If you define it using
+//another object, it will initially have all the same values as the other one, but it is a seperate object and will be different
+//when modified.
 
 /*:
  _Copyright © 2023 Apple Inc._
